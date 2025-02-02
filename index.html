@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Gardening Services Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #A8D5BA; /* Pastel Green */
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            background-image: url('https://www.example.com/garden-background.jpg'); /* Replace with your desired image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .entities {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .entity {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            font-size: 12px;
+        }
+
+        .entity h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .entity-details {
+            display: none;
+            background-color: #A8D5BA; /* Same as body background */
+            color: #006400; /* Dark Green */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 16px; /* Increased text size */
+        }
+
+        .entity-details h3 {
+            font-size: 24px; /* Increased heading size */
+            margin-bottom: 15px;
+        }
+
+        .entity-details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .entity-details li {
+            margin: 10px 0;
+        }
+
+        .entity-details .bold-text {
+            font-weight: bold;
+            font-size: 18px; /* Increased size of bold text */
+        }
+
+        .entity-details .attributes, .entity-details .relationships {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Modern Gardening Services Platform</h1>
+    </header>
+
+    <div class="container">
+        <section class="entities">
+            <div class="entity" onclick="showEntityDetails('user')">
+                <h2>User</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('serviceprovider')">
+                <h2>Service Provider</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('service')">
+                <h2>Landscaping Service</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('booking')">
+                <h2>Booking</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('payment')">
+                <h2>Payment</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('tutorial')">
+                <h2>DIY Tutorial</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('tutorialtracking')">
+                <h2>Tutorial Tracking</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('review')">
+                <h2>Review & Ratings</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('product')">
+                <h2>Product</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('order')">
+                <h2>Order</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('orderproduct')">
+                <h2>OrderProduct</h2>
+            </div>
+            <div class="entity" onclick="showEntityDetails('admin')">
+                <h2>Admin</h2>
+            </div>
+        </section>
+
+        <section id="entity-details" class="entity-details">
+            <!-- Details will be displayed here -->
+        </section>
+    </div>
+
+    <script>
+        function showEntityDetails(entity) {
+            const details = document.getElementById("entity-details");
+            details.style.display = "block";
+
+            switch (entity) {
+                case 'user':
+                    details.innerHTML = `
+                        <h3>User</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>UserID (PK)</li>
+                                <li>Name</li>
+                                <li>Email (Unique)</li>
+                                <li>PhoneNumber</li>
+                                <li>Address</li>
+                                <li>Role (Enum: Admin, Client, ServiceProvider)</li>
+                                <li>PasswordHash</li>
+                                <li>CreatedAt</li>
+                                <li>UpdatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A user can have multiple bookings (1:N)</li>
+                                <li>A user can have multiple orders (1:N)</li>
+                                <li>A user can submit multiple reviews (1:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'serviceprovider':
+                    details.innerHTML = `
+                        <h3>Service Provider</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>ProviderID (PK)</li>
+                                <li>UserID (FK)</li>
+                                <li>BusinessName</li>
+                                <li>ServiceCategory</li>
+                                <li>Availability (Boolean)</li>
+                                <li>Ratings (Float)</li>
+                                <li>CreatedAt</li>
+                                <li>UpdatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A service provider offers multiple services (1:N)</li>
+                                <li>A service provider receives multiple bookings (1:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'service':
+                    details.innerHTML = `
+                        <h3>Landscaping Service</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>ServiceID (PK)</li>
+                                <li>ProviderID (FK)</li>
+                                <li>Name</li>
+                                <li>Description</li>
+                                <li>Price</li>
+                                <li>Duration (Minutes)</li>
+                                <li>CreatedAt</li>
+                                <li>UpdatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A service belongs to a single service provider (N:1)</li>
+                                <li>A service can have multiple bookings (1:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'booking':
+                    details.innerHTML = `
+                        <h3>Booking</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>BookingID (PK)</li>
+                                <li>UserID (FK)</li>
+                                <li>ServiceID (FK)</li>
+                                <li>ProviderID (FK)</li>
+                                <li>BookingDate</li>
+                                <li>Status (Enum: Pending, Confirmed, Completed, Cancelled)</li>
+                                <li>CreatedAt</li>
+                                <li>UpdatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A booking is linked to a payment (1:1)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'payment':
+                    details.innerHTML = `
+                        <h3>Payment</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>PaymentID (PK)</li>
+                                <li>BookingID (FK, Nullable)</li>
+                                <li>UserID (FK)</li>
+                                <li>Amount</li>
+                                <li>PaymentMethod (Enum: CreditCard, DebitCard, UPI, PayPal)</li>
+                                <li>Status (Enum: Paid, Refunded, Pending)</li>
+                                <li>CreatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A payment is linked to a single booking (1:1)</li>
+                                <li>A payment is linked to a single user (N:1)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'tutorial':
+                    details.innerHTML = `
+                        <h3>DIY Tutorial</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>TutorialID (PK)</li>
+                                <li>Title</li>
+                                <li>Content</li>
+                                <li>Category (Enum: Planting, Pruning, Landscaping, Container Gardening)</li>
+                                <li>DifficultyLevel (Enum: Beginner, Intermediate, Advanced)</li>
+                                <li>CreatedAt</li>
+                                <li>UpdatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A user can track multiple tutorials (M:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'tutorialtracking':
+                    details.innerHTML = `
+                        <h3>Tutorial Tracking</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>TrackingID (PK)</li>
+                                <li>UserID (FK)</li>
+                                <li>TutorialID (FK)</li>
+                                <li>Progress (Percentage)</li>
+                                <li>LastAccessed</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A user can have multiple tutorial tracking entries (1:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'review':
+                    details.innerHTML = `
+                        <h3>Review & Ratings</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>ReviewID (PK)</li>
+                                <li>UserID (FK)</li>
+                                <li>ServiceID (FK, Nullable)</li>
+                                <li>ProductID (FK, Nullable)</li>
+                                <li>Rating (1-5)</li>
+                                <li>ReviewText</li>
+                                <li>CreatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A user can write multiple reviews (1:N)</li>
+                                <li>A service/product can have multiple reviews (1:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'product':
+                    details.innerHTML = `
+                        <h3>Product</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>ProductID (PK)</li>
+                                <li>Name</li>
+                                <li>Description</li>
+                                <li>Price</li>
+                                <li>StockQuantity</li>
+                                <li>CreatedAt</li>
+                                <li>UpdatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A product can belong to multiple orders (M:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'order':
+                    details.innerHTML = `
+                        <h3>Order</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>OrderID (PK)</li>
+                                <li>UserID (FK)</li>
+                                <li>OrderDate</li>
+                                <li>TotalAmount</li>
+                                <li>Status (Enum: Processing, Shipped, Delivered)</li>
+                                <li>CreatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>A user can place multiple orders (1:N)</li>
+                                <li>An order contains multiple products (M:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'orderproduct':
+                    details.innerHTML = `
+                        <h3>OrderProduct</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>OrderID (FK)</li>
+                                <li>ProductID (FK)</li>
+                                <li>Quantity</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>An order can contain multiple products (M:N)</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+                case 'admin':
+                    details.innerHTML = `
+                        <h3>Admin</h3>
+                        <div class="attributes">
+                            <span class="bold-text">Attributes:</span>
+                            <ul>
+                                <li>AdminID (PK)</li>
+                                <li>UserID (FK, Unique)</li>
+                                <li>Role (Enum: SuperAdmin, Moderator)</li>
+                                <li>CreatedAt</li>
+                            </ul>
+                        </div>
+                        <div class="relationships">
+                            <span class="bold-text">Relationships:</span>
+                            <ul>
+                                <li>An admin oversees users, bookings, and payments.</li>
+                            </ul>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
